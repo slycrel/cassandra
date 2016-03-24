@@ -39,7 +39,9 @@ RUN mkdir -p /var/lib/cassandra "$CASSANDRA_CONFIG" \
 VOLUME /var/lib/cassandra
 
 #custom password stuff
-RUN echo -e "controlRole R&D\nmonitorRole QED\ncass cass" >> /etc/cassandra/jmxremote.password
+RUN echo "controlRole R&D" >> /etc/cassandra/jmxremote.password
+RUN echo "monitorRole QED" >> /etc/cassandra/jmxremote.password
+RUN echo "cass cass" >> /etc/cassandra/jmxremote.password
 RUN chown cassandra:cassandra /etc/cassandra/jmxremote.password
 RUN chmod 400 /etc/cassandra/jmxremote.password
 RUN echo "cass readwrite" >> /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/management/jmxremote.access
