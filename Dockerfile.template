@@ -39,14 +39,12 @@ RUN mkdir -p /var/lib/cassandra "$CASSANDRA_CONFIG" \
 VOLUME /var/lib/cassandra
 
 #custom password stuff
-RUN echo -e "controlRole R&D\n \
-monitorRole QED\n \
-cass cass" >> /etc/cassandra/jmxremote.password
-
+RUN echo -e "controlRole R&D\nmonitorRole QED\ncass cass" >> /etc/cassandra/jmxremote.password
 RUN chown cassandra:cassandra /etc/cassandra/jmxremote.password
 RUN chmod 400 /etc/cassandra/jmxremote.password
-
-RUN echo -e "\ncass readWrite\n" >> /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/management/jmxremote.access
+RUN mkdir -p /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/management
+RUN touch /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/management/jmxremote.access
+RUN echo -e "\ncass readwrite\n" >> /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/management/jmxremote.access
 
 
 # 7000: intra-node communication
