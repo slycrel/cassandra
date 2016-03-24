@@ -42,9 +42,7 @@ VOLUME /var/lib/cassandra
 RUN echo -e "controlRole R&D\nmonitorRole QED\ncass cass" >> /etc/cassandra/jmxremote.password
 RUN chown cassandra:cassandra /etc/cassandra/jmxremote.password
 RUN chmod 400 /etc/cassandra/jmxremote.password
-RUN mkdir -p /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/management
-RUN touch /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/management/jmxremote.access
-RUN echo -e "\ncass readwrite\n" >> /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/management/jmxremote.access
+RUN echo "cass readwrite" >> /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/management/jmxremote.access
 
 
 # 7000: intra-node communication
