@@ -38,6 +38,12 @@ RUN mkdir -p /var/lib/cassandra "$CASSANDRA_CONFIG" \
 	&& chmod 777 /var/lib/cassandra "$CASSANDRA_CONFIG"
 VOLUME /var/lib/cassandra
 
+#custom password stuff
+RUN echo "controlRole pass2" >> /etc/cassandra/jmxremote.password
+RUN chown cassandra:cassandra /etc/cassandra/jmxremote.password
+RUN chmod 400 /etc/cassandra/jmxremote.password
+
+
 # 7000: intra-node communication
 # 7001: TLS intra-node communication
 # 7199: JMX
